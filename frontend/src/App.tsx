@@ -1,12 +1,13 @@
 import React from "react";
 import "./App.css";
-import Tweets from "./components/Tweets";
+import Tweets2 from "./components/Tweets2";
+//import Tweets from "./components/Tweets";
 
 function App() {
   return (
     <div className="App">
       <h1>Griffin, Nate, and Evan's Tweet of the Day</h1>
-      <Tweets></Tweets>
+      <Tweets2></Tweets2>
     </div>
   );
 }
