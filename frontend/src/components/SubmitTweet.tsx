@@ -9,9 +9,9 @@ const SubmitTweet = () => {
   const [tweet, setTweet] = React.useState("");
 
   const handleSubmit = async (e: any) => {
-    console.log("submitClicked");
     const match = /(?<=\/status\/)(?:(?!\?).)*/.exec(tweet);
-
+    e.preventDefault();
+    setTweet("");
     //submit tweet
     if (match !== null) {
       const tweet = {
@@ -19,10 +19,10 @@ const SubmitTweet = () => {
         date: Timestamp.now(),
       };
       const query = collection(db, "tweets");
-      addDoc(query, tweet);
+      addDoc(query, tweet).then(() => {
+        window.location.reload();
+      });
     }
-    e.preventDefault();
-    setTweet("");
   };
 
   const handleChange = (e: any) => {
