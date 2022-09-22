@@ -1,5 +1,5 @@
-import { Button, TextField } from "@mui/material";
 import React from "react";
+import { Button, TextField } from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import db from "../firebaseHelper";
 import { addDoc, collection } from "firebase/firestore";
@@ -9,13 +9,15 @@ const SubmitTweet = () => {
   const [tweet, setTweet] = React.useState("");
 
   const handleSubmit = async (e: any) => {
-    const match = /(?<=\/status\/)(?:(?!\?).)*/.exec(tweet);
+    const matches = tweet.match("status/(\\d+)");
+    const match = matches?.at(1);
     e.preventDefault();
     setTweet("");
     //submit tweet
-    if (match !== null) {
+    const formattedMatch = match ?? "";
+    if (match !== null && match !== "") {
       const tweet = {
-        tweetId: match[0],
+        tweetId: formattedMatch,
         date: Timestamp.now(),
       };
       const query = collection(db, "tweets");
